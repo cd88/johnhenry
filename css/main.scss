@@ -3,6 +3,8 @@
 /* Customization Variables */
 
 $accent: #4BAEA0;
+$accent-hover: #37BEB0;
+$accent-active: #329A95;
 
 $max-width: 1130px;
 $med-width: 600px;
@@ -184,7 +186,11 @@ $small-width: 480px;
     display: inline-block;
 
     &:hover {
-        background-color: darken($accent, 10%);
+        background-color: $accent-hover;
+    }
+
+    &:active {
+        background-color: $accent-active;
     }
 }
 

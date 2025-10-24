@@ -1,0 +1,22 @@
+---
+layout: default
+permalink: /bingo/
+---
+
+<h1>AI Implementation Bingo</h1>
+<p>Play online and compete with your colleagues and friends. Saves your progress automatically.</p>
+
+<link rel="stylesheet" href="/css/bingo.css">
+
+<div id="bingo-main">
+  <div id="bingo-options">
+    <label for="bingo-color">Accent Color:</label>
+    <input type="color" id="bingo-color" name="bingo-color" value="#ffffff" style="vertical-align:middle;">
+    <button id="bingo-reset" class="btn-primary" type="button">Reset Game</button>
+    <button id="bingo-share" class="btn-primary" type="button">Share</button>
+    <span id="bingo-share-status" style="display:none; margin-left:8px; color:green;">Link copied!</span>
+  </div>
+  {% include bingo-card/bingo-card.html %}
+</div>
+
+<script src="{{ '/assets/js/bingo.js' | relative_url }}"></script>

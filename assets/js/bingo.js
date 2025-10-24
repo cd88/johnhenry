@@ -4,6 +4,9 @@ const bingo_letters_printer_friendly = '/assets/bingo-assets/bingo-letters-print
 const bingo_letters = '/assets/bingo-assets/bingo-letters.svg';
 const bingo_title = '/assets/bingo-assets/bingo-title.svg';
 
+// Check if current URL path is bingo-printer
+var isBingoPrinter = window.location.pathname.indexOf('bingo-printer') !== -1;
+
 const bingoText = [
   "AI increases efficiency & productivity",
   "This is not deskilling, it's upskilling",
@@ -33,18 +36,18 @@ const bingoText = [
 ]
 
 const extraPhrases = [
-    "AI will create new jobs we can't imagine yet",
-    "AI can help with diversity and inclusion",
-    "AI can help reduce bias",
-    "AI can handle repetitive tasks",
-    "We need to embrace AI to stay competitive",
-    "AI can help with accessibility",
-    "AI can help with sustainability",
-    "AI can help with mental health",
-    "AI can help with work-life balance",
-    "AI can help with creativity",
-    "AI can help with innovation",
-    "AI reduces personal bias in decision making"
+  "AI will create new jobs we can't imagine yet",
+  "AI can help with diversity and inclusion",
+  "AI can help reduce bias",
+  "AI can handle repetitive tasks",
+  "We need to embrace AI to stay competitive",
+  "AI can help with accessibility",
+  "AI can help with sustainability",
+  "AI can help with mental health",
+  "AI can help with work-life balance",
+  "AI can help with creativity",
+  "AI can help with innovation",
+  "AI reduces personal bias in decision making"
 ]
 
 const bingoSize = 5;
@@ -58,9 +61,10 @@ function getRandomInt(max) {
 
 // Bingo Card Generator UI and Logic
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Main render function
   function renderBingoCards() {
+    if (isBingoPrinter) {
     // Get options
     const style = document.querySelector('input[name="cardStyle"]:checked').value;
     const useLessInk = style === 'useLessInk';
@@ -84,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (bingoCard) {
       bingoCard.className = style + (showBg ? '' : ' hide-bg');
     }
-
+  }
     // Fill in the bingo grid
     const table = document.querySelector('.bingo-grid tbody');
     if (!table) return;
@@ -116,69 +120,93 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Update card automatically when options change
-  document.getElementById('bingo-options-form').addEventListener('input', function(e) {
-    if (e.target.id !== 'printBingo' && e.target.id !== 'printCount') {
-      renderBingoCards();
-    }
-  });
-
-  document.getElementById('printCount').addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      document.getElementById('printBingo').click();
-    }
-  });
-
-  document.getElementById('printBingo').addEventListener('click', function() {
-    var style = document.querySelector('input[name="cardStyle"]:checked').value;
-    var printCount = Math.max(1, Math.min(40, parseInt(document.getElementById('printCount').value) || 1));
-    if (bingoCard) bingoCard.className = style;
-
-    // Prepare print window
-    var printWindow = window.open('', '_blank');
-    // Add bingo-print-mode class to body and link to bingo.css
-    var printCssLink = '<link rel="stylesheet" href="/css/bingo.css">';
-    var printBodyClass = ' class="bingo-print-mode"';
-
-    // Clone the current bingo card
-    var cardElem = document.querySelector('.bingo-card');
-    if (!cardElem) return;
-    var originalClass = cardElem.className;
-    var cardsHtml = [];
-    for (var i = 0; i < printCount; i++) {
-      // For each print card, set full-bg class based on current showBackground state
-      var showBg = document.getElementById('showBackground').checked;
-      if (showBg) {
-        cardElem.classList.add('full-bg');
-      } else {
-        cardElem.classList.remove('full-bg');
+  if (isBingoPrinter) {
+    // Update card automatically when options change
+    document.getElementById('bingo-options-form').addEventListener('input', function (e) {
+      if (e.target.id !== 'printBingo' && e.target.id !== 'printCount') {
+        renderBingoCards();
       }
-      renderBingoCards();
-      var clone = cardElem.cloneNode(true);
-      clone.className = cardElem.className + ' ' + style + ' print-card';
-      cardsHtml.push('<div class="print-card-rotator">' + clone.outerHTML + '</div>');
-    }
-    // Restore the original class after print staging so toggling works again
-    cardElem.className = originalClass;
+    });
 
-    // Layout: 2 cards per page
-    var containerHtml = '<div class="print-cards-container">';
-    for (var i = 0; i < printCount; i += 2) {
-      containerHtml += '<div class="print-page">';
-      containerHtml += cardsHtml[i] || '';
-      if (i + 1 < printCount) {
-        containerHtml += cardsHtml[i + 1];
+    document.getElementById('printCount').addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById('printBingo').click();
+      }
+    });
+
+    document.getElementById('printBingo').addEventListener('click', function () {
+      var style = document.querySelector('input[name="cardStyle"]:checked').value;
+      var printCount = Math.max(1, Math.min(40, parseInt(document.getElementById('printCount').value) || 1));
+      if (bingoCard) bingoCard.className = style;
+
+      // Prepare print window
+      var printWindow = window.open('', '_blank');
+      // Add bingo-print-mode class to body and link to bingo.css
+      var printCssLink = '<link rel="stylesheet" href="/css/bingo.css">';
+      var printBodyClass = ' class="bingo-print-mode"';
+
+      // Clone the current bingo card
+      var cardElem = document.querySelector('.bingo-card');
+      if (!cardElem) return;
+      var originalClass = cardElem.className;
+      var cardsHtml = [];
+      for (var i = 0; i < printCount; i++) {
+        // For each print card, set full-bg class based on current showBackground state
+        var showBg = document.getElementById('showBackground').checked;
+        if (showBg) {
+          cardElem.classList.add('full-bg');
+        } else {
+          cardElem.classList.remove('full-bg');
+        }
+        renderBingoCards();
+        var clone = cardElem.cloneNode(true);
+        clone.className = cardElem.className + ' ' + style + ' print-card';
+        cardsHtml.push('<div class="print-card-rotator">' + clone.outerHTML + '</div>');
+      }
+      // Restore the original class after print staging so toggling works again
+      cardElem.className = originalClass;
+
+      // Layout: 2 cards per page
+      var containerHtml = '<div class="print-cards-container">';
+      for (var i = 0; i < printCount; i += 2) {
+        containerHtml += '<div class="print-page">';
+        containerHtml += cardsHtml[i] || '';
+        if (i + 1 < printCount) {
+          containerHtml += cardsHtml[i + 1];
+        }
+        containerHtml += '</div>';
       }
       containerHtml += '</div>';
-    }
-    containerHtml += '</div>';
 
-    printWindow.document.write('<!DOCTYPE html><html><head><title>Print Bingo Cards</title>' + printCssLink + '</head><body' + printBodyClass + '>' + containerHtml + '</body></html>');
-    printWindow.document.close();
-    printWindow.focus();
-    setTimeout(function() { printWindow.print(); }, 500);
-  });
+      printWindow.document.write('<!DOCTYPE html><html><head><title>Print Bingo Cards</title>' + printCssLink + '</head><body' + printBodyClass + '>' + containerHtml + '</body></html>');
+      printWindow.document.close();
+      printWindow.focus();
+      setTimeout(function () { printWindow.print(); }, 500);
+    });
+  } else { // End if !isBingoPrinter
+      
+    
+    // Game Logic
+    document.getElementById('bingo-reset').addEventListener('click', function () {
+      // Reset game state
+      renderBingoCards();
+    });
+    // Share button logic
+    document.getElementById('bingo-share').addEventListener('click', function () {
+      const permalink = 'http://workersdecide.tech/bingo';
+      navigator.clipboard.writeText(permalink).then(function () {
+        var status = document.getElementById('bingo-share-status');
+        if (status) {
+          status.style.display = 'inline';
+          setTimeout(function () {
+            status.style.display = 'none';
+          }, 2000);
+        }
+      });
+    });
+  }
+  // Initial render
   renderBingoCards();
 });
 
