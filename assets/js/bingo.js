@@ -50,6 +50,7 @@ const extraPhrases = [
 const bingoSize = 5;
 let bingoGrid = [];
 let selected = [];
+const bingoCard = document.getElementById('bingo-card-container');
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -66,8 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const blackWhite = style === 'blackWhite';
     const fullColor = style === 'fullColor';
 
-    // Set the main container class for style switching
-    var main = document.getElementById('bingo-main');
     var showBgCheckbox = document.getElementById('showBackground');
     var showBg = showBgCheckbox.checked;
     // If useLessInk is selected, auto-deselect showBg ONCE, but allow user to re-check it
@@ -82,8 +81,8 @@ document.addEventListener('DOMContentLoaded', function() {
       showBgCheckbox._autoDeselected = false;
     }
     showBg = showBgCheckbox.checked;
-    if (main) {
-      main.className = style + (showBg ? '' : ' hide-bg');
+    if (bingoCard) {
+      bingoCard.className = style + (showBg ? '' : ' hide-bg');
     }
 
     // Fill in the bingo grid
@@ -119,16 +118,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Update card automatically when options change
   document.getElementById('bingo-options-form').addEventListener('input', function(e) {
-    if (e.target.id !== 'printBingo' && e.target.id !== 'numCards') {
+    if (e.target.id !== 'printBingo' && e.target.id !== 'printCount') {
       renderBingoCards();
+    }
+  });
+
+  document.getElementById('printCount').addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById('printBingo').click();
     }
   });
 
   document.getElementById('printBingo').addEventListener('click', function() {
     var style = document.querySelector('input[name="cardStyle"]:checked').value;
-    var numCards = Math.max(1, Math.min(40, parseInt(document.getElementById('numCards').value) || 1));
-    var main = document.getElementById('bingo-main');
-    if (main) main.className = style;
+    var printCount = Math.max(1, Math.min(40, parseInt(document.getElementById('printCount').value) || 1));
+    if (bingoCard) bingoCard.className = style;
 
     // Prepare print window
     var printWindow = window.open('', '_blank');
@@ -141,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!cardElem) return;
     var originalClass = cardElem.className;
     var cardsHtml = [];
-    for (var i = 0; i < numCards; i++) {
+    for (var i = 0; i < printCount; i++) {
       // For each print card, set full-bg class based on current showBackground state
       var showBg = document.getElementById('showBackground').checked;
       if (showBg) {
@@ -159,10 +164,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Layout: 2 cards per page
     var containerHtml = '<div class="print-cards-container">';
-    for (var i = 0; i < numCards; i += 2) {
+    for (var i = 0; i < printCount; i += 2) {
       containerHtml += '<div class="print-page">';
       containerHtml += cardsHtml[i] || '';
-      if (i + 1 < numCards) {
+      if (i + 1 < printCount) {
         containerHtml += cardsHtml[i + 1];
       }
       containerHtml += '</div>';

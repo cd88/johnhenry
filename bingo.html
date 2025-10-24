@@ -8,18 +8,26 @@ permalink: /bingo/
 
 <link rel="stylesheet" href="/css/bingo.css">
 
-<form id="bingo-options-form" style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;">
-  <fieldset style="border:none;display:flex;flex-direction:column;gap:0.5rem;align-items:flex-start;">
-    <legend style="font-weight:bold;">Card Style:</legend>
-    <label><input type="radio" name="cardStyle" id="fullColor" value="fullColor" checked> Full Color</label>
-    <label><input type="radio" name="cardStyle" id="blackWhite" value="blackWhite"> Black & White</label>
-    <label><input type="radio" name="cardStyle" id="useLessInk" value="useLessInk"> Use Less Ink</label>
-    <label style="margin-top:0.5em;"><input type="checkbox" id="showBackground" checked> Show Background</label>
-  </fieldset>
-  <label>Number of cards to print: <input type="number" id="numCards" min="1" max="40" value="1" style="width:3em;"></label>
-  <button type="button" id="printBingo">Print Bingo Cards</button>
-</form>
+<div id="bingo-main">
+  <form id="bingo-options-form">
+    <fieldset>
+      <legend>Card Style:</legend>
+      <label><input type="radio" name="cardStyle" id="fullColor" value="fullColor" checked> Full Color</label>
+      <label><input type="radio" name="cardStyle" id="blackWhite" value="blackWhite"> Black & White</label>
+      <label><input type="radio" name="cardStyle" id="useLessInk" value="useLessInk"> Use Less Ink</label>
+      <label style="margin-top:0.5em;"><input type="checkbox" id="showBackground" checked> Show Background</label>
+    </fieldset>
+    <div id="print-options">
+      <label style="font-weight: bold;">Print Count: <input style="margin-left:8px;" type="number" id="printCount" min="1" max="40" value="1" style="width:3em;"></label>
+      <button type="button" id="printBingo" class="btn-primary">Print Bingo Cards</button>
+    </div>
+  </form>
 
-{% include bingo-card/bingo-card.html %}
+  {% include bingo-card/bingo-card.html %}
+</div>
+
+<div class="warning-box">
+  <!-- <strong>Note:</strong> Be smart when using this tool in workplaces with strict surveillance or monitoring policies. Ensure that participating in this activity does not put you or your colleagues at risk of disciplinary action. -->
+</div>
 
 <script src="{{ '/assets/js/bingo.js' | relative_url }}"></script>

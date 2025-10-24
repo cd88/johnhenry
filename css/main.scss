@@ -171,6 +171,23 @@ $small-width: 480px;
     }
 }
 
+.btn-primary {
+    background-color: $accent;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    height: 40px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+
+    &:hover {
+        background-color: darken($accent, 10%);
+    }
+}
+
 /* pages */
 
 .page-title {
