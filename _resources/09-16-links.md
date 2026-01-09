@@ -31,7 +31,8 @@ There's new news about AI every day, almost too much, and much of it fluff, hype
 
 ### Allied Campaigns
 
-* [Amazon Employees for Climate Justice Employee Open Letter](https://www.amazonclimatejustice.org/open-letter)x
+* [Amazon Employees for Climate Justice Employee Open Letter](https://www.amazonclimatejustice.org/open-letter)
+* [NewsGuild-CWA's News Not Slop](https://www.newsnotslop.org/)
 
 ### Research Resources
 * [TUC generative AI policy toolkit](https://www.tuc.org.uk/research-analysis/reports/tuc-generative-ai-policy-toolkit)
@@ -39,7 +40,7 @@ There's new news about AI every day, almost too much, and much of it fluff, hype
 * [AI, algorithmic and automation harms taxonomy](https://www.aiaaic.org/projects/ai-algorithmic-automation-harms-taxonomy)
 * [AIAAIC Repository of Incidents and Controversies](https://www.aiaaic.org/aiaaic-repository)
 
-### Organizing Trainings
+### Organizing Trainings and Support
 * [Emergency Workplace Organizing Committee](https://workerorganizing.org/training/)
 * [Labor Notes](https://labornotes.org/events)
 * [Code-CWA](https://code-cwa.org/upcoming-trainings)
@@ -57,7 +58,9 @@ There's new news about AI every day, almost too much, and much of it fluff, hype
 * [AI Killed My Job](https://www.bloodinthemachine.com/p/how-ai-is-killing-jobs-in-the-tech-f39)
 * [News Unions Grapple with Generative AI](https://www.niemanlab.org/2025/03/news-unions-are-grappling-with-generative-ai-our-new-study-shows-what-theyre-most-concerned-about/)
 * [Artificial Intelligence as a Union Buster](https://prospect.org/labor/2023-09-07-artificial-intelligence-union-buster-neda/)
-* [What Happens After A.I. Destroys College Writing?](https://www.newyorker.com/magazine/2025/07/07/the-end-of-the-english-paper)
+* [What Happens After A.I. Destroys College
+  Writing?](https://www.newyorker.com/magazine/2025/07/07/the-end-of-the-english-paper)
+* [ Study finds AI tools made open source software developers 19 percent slower ](https://arstechnica.com/ai/2025/07/study-finds-ai-tools-made-open-source-software-developers-19-percent-slower/)
 * [National Nurses United survey finds A.I. technology degrades and undermines patient safety](https://www.nationalnursesunited.org/press/national-nurses-united-survey-finds-ai-technology-undermines-patient-safety)
 * [Seismic Report reveals public souring on AI](https://report2025.seismic.org/)
 * [Present Tense Technology - how labor has responded to automation in the past](https://democracyjournalarchive.wordpress.com/wp-content/uploads/2015/06/noble_present-tense-technology_-part-2-democracy-3-2_-may-1983.pdf)
